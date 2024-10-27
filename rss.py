@@ -41,7 +41,8 @@ for page in range(1, LAST_PAGE+1):
         title = job['title']
         date = datetime.fromisoformat(job['postingDate'])
         link = "https://jobs.careers.microsoft.com/global/en/job/"+id+"/"
-        POSTS[link] = Post(link, title, date)
+        if not (link in POSTS.keys()):
+            POSTS[link] = Post(link, title, date)
 
 STREAM = sorted(
     [POSTS[key] for key in POSTS.keys()], key=lambda x: x.date, reverse=True
